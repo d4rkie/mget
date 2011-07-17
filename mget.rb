@@ -69,10 +69,12 @@ def load_mangastream_chapter(url, dir)
   
   tokens = url.split('/')
   
-  doc.xpath("//option").each do |node|
-    if (node['value'].include? tokens[tokens.length - 2])
-      pageLinks[node['value']] = node.text
-      if (node['selected'])
+  doc.xpath("//div/a").each do |node|
+    if (node['href'].include? tokens[tokens.length - 2])
+      if (node.text.to_i > 0)
+        pageLinks[node['href']] = node.text
+      end
+      if (node['class'] == "active")
         current_page = node.text
       end
     end
@@ -94,7 +96,7 @@ def load_mangastream_chapter(url, dir)
   
   # legacy check 
   
-  old_pages = doc.xpath("//img[@id='p']")
+  old_pages = doc.xpath("//div[@id='p']/a/img")
   
   if (old_pages.length > 0)
     puts "!page #{current_page} is a legacy page. saving..."
@@ -197,7 +199,7 @@ def assembleMSPage(url, page_num, dir)
   
   # legacy check 
   
-  old_pages = doc.xpath("//img[@id='p']")
+  old_pages = doc.xpath("//div[@id='p']/a/img")
   
   if (old_pages.length > 0)
     puts "!page #{current_page} is a legacy page. saving..."
@@ -279,7 +281,7 @@ end
 
 if __FILE__ == $0
   # change this to save the chapters to a fixed folder
-  dir = ""
+  dir = "/Users/d4rkie/tmp/"
   
   # parsing arguments
   if (ARGV.length > 0)
