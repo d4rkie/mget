@@ -281,7 +281,7 @@ end
 
 if __FILE__ == $0
   # change this to save the chapters to a fixed folder
-  dir = "/Users/d4rkie/tmp/"
+  dir = ""
   
   # parsing arguments
   if (ARGV.length > 0)
