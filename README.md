@@ -7,7 +7,6 @@ the script is made executable, so for convenience symlink it to a /bin visible f
 prerequisites
 -------------
 * nokogiri
-* rmagick
 * css_parser
 * fileutils
 
@@ -17,5 +16,6 @@ usage
 * **mget** - list all available chapters and their links
 * **mget {mangastream-link}** - downloads the chapter this page is from to a folder named: {series-name}{chapter-number}
 * **mget list** - does the same as **mget**
-* **mget get {mangastream-link}** - does the same as **mget {mangastream-link}**
+* **mget last {number_of_chapters}** - downloads latest {numbre_of_chapters} from the **mget list**
+* **mget all** - downloads all the chapters returned by **mget list** 
 
